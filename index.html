@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SplitWise</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1 id="title">SplitWise</h1>
+
+    <div class="users">
+      
+      <div class="user">
+        <h3>Andrea Edson</h3>
+        <img src="/source/randy.jpg" alt="" />
+        <label for="money_spent_andrea">money_spent</label>
+        <input type="text" id="money_spent_andrea">
+        <button id="button_andrea">add</button>
+      </div>
+
+      <div class="user">
+        <h3>Marta Melo</h3>
+        <img src="/source/marta.jpg" alt="" />
+        <label for="money_spent_marta">money_spent</label>
+        <input type="text" id="money_spent_marta">
+        <button id="button_marta">add</button>
+      </div>
+
+    </div>
+
+    <div class="debt-container">
+      <h3>Money spent: <span id="total_spent">0</span> €</h3>
+    </div>
+
+    <div class="balances">
+        <h4>
+            Marta: <span id="marta_balance">0</span> € 
+        </h4>
+        <h4>
+            Andrea: <span id="andrea_balance">0</span> € 
+        </h4>
+    </div>
+
+    <script src="/js/balance.js"></script>
+
+  </body>
 </html>

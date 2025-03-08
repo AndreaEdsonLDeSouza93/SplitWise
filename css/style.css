@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#title {
+    font-style: italic;
+}
+
+.users {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+
+.user {
+    text-align: center;
+}
+
+img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.debt-container {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .balances {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  .balance {
+    font-weight: bold;
+    color: darkred;
+  }
+
+
+
