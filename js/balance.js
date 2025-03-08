@@ -1,57 +1,57 @@
-let money_spent_marta;
-let money_spent_andrea;
-let total_spent_html_element;
-let total_spent_js_variable = 0; // to avoid undefined
-let andrea_balance = 0;
-let marta_balance = 0;
+// Variables
+let totalSpent = parseFloat(localStorage.getItem("totalSpent")) || 0;
+let andreaBalance = parseFloat(localStorage.getItem("andreaBalance")) || 0;
+let martaBalance = parseFloat(localStorage.getItem("martaBalance")) || 0;
 
-const userAndrea = "andrea";
-const userMarta = "marta";
+// DOM Elements
+const totalSpentElement = document.getElementById("total_spent");
+const andreaBalanceElement = document.getElementById("andrea_balance");
+const martaBalanceElement = document.getElementById("marta_balance");
 
-function balanceCalculation(money_spent, user) {
-  andrea_balance_html = document.getElementById("andrea_balance");
-  marta_balance_html = document.getElementById("marta_balance");
+// Load saved values
+updateUI();
 
-  if (user === "andrea") {
-    andrea_balance += money_spent / 2;
-    marta_balance -= money_spent / 2;
-  } else if (user === "marta") {
-    andrea_balance -= money_spent / 2;
-    marta_balance += money_spent / 2;
-  }
+// Function to handle spending
+function handleSpending(user) {
+    let input = document.getElementById(`money_spent_${user}`);
+    let amount = parseFloat(input.value);
 
-  andrea_balance_html.innerHTML = andrea_balance.toFixed(2);
-  marta_balance_html.innerHTML = marta_balance.toFixed(2);
+    if (!isNaN(amount) && amount > 0) {
+        totalSpent += amount;
+
+        if (user === "andrea") {
+            andreaBalance += amount / 2;
+            martaBalance -= amount / 2;
+        } else if (user === "marta") {
+            andreaBalance -= amount / 2;
+            martaBalance += amount / 2;
+        }
+
+        // Save to localStorage
+        localStorage.setItem("totalSpent", totalSpent);
+        localStorage.setItem("andreaBalance", andreaBalance);
+        localStorage.setItem("martaBalance", martaBalance);
+
+        updateUI();
+    } else {
+        alert("Please enter a valid number.");
+    }
+
+    input.value = "";
 }
 
+// Function to update UI
+function updateUI() {
+    totalSpentElement.innerHTML = totalSpent.toFixed(2);
+    andreaBalanceElement.innerHTML = andreaBalance.toFixed(2);
+    martaBalanceElement.innerHTML = martaBalance.toFixed(2);
+}
+
+// Event Listeners
 document.getElementById("button_andrea").onclick = function () {
-  money_spent_andrea = document.getElementById("money_spent_andrea").value;
-  let float_parse_money_andrea = parseFloat(money_spent_andrea);
-
-  if (!isNaN(float_parse_money_andrea)) {
-    total_spent_js_variable += float_parse_money_andrea; // now it will not return undefined
-
-    balanceCalculation(float_parse_money_andrea, userAndrea);
-
-    total_spent_html_element = document.getElementById("total_spent");
-    total_spent_html_element.innerHTML = total_spent_js_variable.toFixed(2); // it shows 2 decimals
-  } else {
-    console.log("Invalid data. Insert a number");
-  }
+    handleSpending("andrea");
 };
 
 document.getElementById("button_marta").onclick = function () {
-  money_spent_marta = document.getElementById("money_spent_marta").value;
-  let float_parse_money_marta = parseFloat(money_spent_marta);
-
-  if (!isNaN(float_parse_money_marta)) {
-    total_spent_js_variable += float_parse_money_marta;
-
-    balanceCalculation(float_parse_money_marta, userMarta);
-
-    total_spent_html_element = document.getElementById("total_spent");
-    total_spent_html_element.innerHTML = total_spent_js_variable.toFixed(2);
-  } else {
-    console.log("Invalid data. Insert a number");
-  }
+    handleSpending("marta");
 };
